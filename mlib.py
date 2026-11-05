@@ -96,7 +96,7 @@ def height_human(float_inches):
 def human_readable_payload(predict_value):
     """Takes numpy array and returns back human readable dictionary"""
 
-    height_inches = float(np.round(predict_value, 2))
+    height_inches = float(np.round(predict_value, 2).item())
     result = {
         "height_inches": height_inches,
         "height_human_readable": height_human(height_inches),
