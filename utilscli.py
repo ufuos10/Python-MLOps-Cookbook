@@ -1,4 +1,6 @@
 #!/usr/bin/env python
+from wsgiref import headers
+
 import click
 import mlib
 import requests
@@ -38,7 +40,12 @@ def mkrequest(weight, host):
         )
     )
     payload = {"Weight": weight}
-    result = requests.post(url=host, json=payload)
+    try:
+        result = requests.post(url=host, json=payload, headers=headers, timeout=10)
+        result.raise_for_status()
+    except requests.exceptions.Timeout as exc:
+        click.echo("The request timed out. Is the server running?")
+        raise SystemExit(1) from exc
     click.echo(click.style(f"result: {result.text}", bg="red", fg="white"))
 
 
