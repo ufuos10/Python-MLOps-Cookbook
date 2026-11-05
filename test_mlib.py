@@ -28,7 +28,7 @@ def test_format_input(test_array):
 
 
 def test_scale_input(test_array):
-    assert int(scale_input(test_array)) == int(np.array([[-9.56513601]]))
+    assert int(scale_input(test_array).item()) == int(-9.56513601)
 
 
 def test_height_human():
